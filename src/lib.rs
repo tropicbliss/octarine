@@ -19,8 +19,8 @@
 //! let color2 = Color::new(255, 0, 0);
 //! assert_eq!(color1, Some(color2.clone()));
 //!
-//! let hex = color2.to_hex();
-//! assert_eq!(hex, 0xFF0000);
+//! let hex = Color::new(100, 100, 100).to_hex();
+//! assert_eq!(hex, 0x646464);
 //!
 //! let red = color2.get_red();
 //! let green = color2.get_green();
@@ -244,9 +244,10 @@ impl Color {
     /// ```
     /// use octarine::Color;
     ///
-    /// let color = Color::from_hex(0xFF9999).screen(Color::new(10, 10, 10)).to_hex();
+    /// let color1 = Color::from_hex(0xFF9D9D);
+    /// let color2 = Color::from_hex(0xFF9999).screen(Color::new(10, 10, 10));
     ///
-    /// assert_eq!(color, 0xFF9D9D);
+    /// assert_eq!(color1, color2);
     /// ```
     pub fn screen(&self, other: Self) -> Self {
         let r = 255 - (((255 - self.0) as usize * (255 - other.0) as usize) / 255) as u8;
@@ -260,9 +261,10 @@ impl Color {
     /// ```
     /// use octarine::Color;
     ///
-    /// let color = Color::from_hex(0xFF9999).difference(Color::new(10, 10, 10)).to_hex();
+    /// let color1 = Color::from_hex(0xF58F8F);
+    /// let color2 = Color::from_hex(0xFF9999).difference(Color::new(10, 10, 10));
     ///
-    /// assert_eq!(color, 0xF58F8F);
+    /// assert_eq!(color1, color2);
     /// ```
     pub fn difference(&self, other: Self) -> Self {
         let r = self.0.abs_diff(other.0);
@@ -276,9 +278,10 @@ impl Color {
     /// ```
     /// use octarine::Color;
     ///
-    /// let color = Color::from_hex(0xFF9999).overlay(Color::new(10, 10, 10)).to_hex();
+    /// let color1 = Color::new(255, 156, 156);
+    /// let color2 = Color::from_hex(0xFF9999).overlay(Color::new(10, 10, 10));
     ///
-    /// assert_eq!(color, 0xFF9B9B);
+    /// assert_eq!(color1, color2);
     /// ```
     #[inline]
     pub fn overlay(&self, other: Self) -> Self {
@@ -1111,5 +1114,7 @@ mod tests {
         assert_eq!(color.to_hsl(), (0.5, 0.49803922, 0.5));
         let color = Color::from_hsv(0.5, 0.5, 0.5);
         assert_eq!(color.to_hsv(), (0.5, 0.5, 0.5019608));
+        let color = Color::from_hex(0x8F8F8F).to_hex();
+        assert_eq!(0x8F8F8F, color);
     }
 }

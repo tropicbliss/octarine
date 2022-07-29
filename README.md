@@ -21,8 +21,8 @@ let color1 = Color::from_web_color("red");
 let color2 = Color::new(255, 0, 0);
 assert_eq!(color1, Some(color2.clone()));
 
-let hex = color2.to_hex();
-assert_eq!(hex, 0xFF0000);
+let hex = Color::new(100, 100, 100).to_hex();
+assert_eq!(hex, 0x646464);
 
 let red = color2.get_red();
 let green = color2.get_green();
