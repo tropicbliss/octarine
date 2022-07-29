@@ -604,6 +604,10 @@ impl Color {
     /// of variation between the current color and another color specified. Refer to
     /// [`ColorRange`] for more information on how it works.
     ///
+    /// # Panics
+    ///
+    /// Panics when steps is 0.
+    ///
     /// # Example
     ///
     /// ```
