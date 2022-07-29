@@ -1,0 +1,16 @@
+[package]
+name = "octarine"
+version = "0.1.0"
+edition = "2021"
+authors = ["tropicbliss <tropicbliss@protonmail.com>"]
+description = "Color manipulation library"
+license = "MIT"
+repository = "https://github.com/tropicbliss/octarine"
+documentation = "https://docs.rs/octarine/"
+readme = "README.md"
+keywords = ["color", "colour"]
+categories = ["algorithms", "graphics", "mathematics"]
+
+[dependencies]
+phf = { version = "0.11", features = ["macros"] }
+rand = { version = "0.8", features = ["small_rng"] }
