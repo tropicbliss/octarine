@@ -15,6 +15,8 @@ colour manipulation operations. Thanks to [colour](https://pypi.org/project/colo
 # Examples
 
 ```rs
+use octarine::Color;
+
 let color1 = Color::from_web_color("red");
 let color2 = Color::new(255, 0, 0);
 assert_eq!(color1, Some(color2));

@@ -13,6 +13,8 @@
 //! # Examples
 //!
 //! ```
+//! use octarine::Color;
+//!
 //! let color1 = Color::from_web_color("red");
 //! let color2 = Color::new(255, 0, 0);
 //! assert_eq!(color1, Some(color2));
@@ -31,8 +33,8 @@
 //! assert_eq!(color2.to_hsl(), (hue, saturation, luminance));
 //!
 //! let hue = color2.get_hsv_hue();
-//! let saturation = color.get_hsv_saturation();
-//! let value = color.get_hsv_value();
+//! let saturation = color2.get_hsv_saturation();
+//! let value = color2.get_hsv_value();
 //! assert_eq!(color2.to_hsv(), (hue, saturation, value));
 //! ```
 //!
@@ -515,9 +517,9 @@ impl Color {
     /// ```
     /// use octarine::{Color, constants};
     ///
-    /// let color = constants::primary::RED;
+    /// let web_color = constants::primary::RED.get_web_color();
     ///
-    /// assert_eq!(color, Some("red"));
+    /// assert_eq!(web_color, Some("red"));
     /// ```
     #[inline]
     pub fn get_web_color(&self) -> Option<&'static str> {
