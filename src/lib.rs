@@ -816,6 +816,8 @@ impl Default for ColorWheel {
 /// You can also iterate through different amounts of gray between black and white.
 ///
 /// ```
+/// use octarine::Color;
+///
 /// let c0 = Color::from_web_color("black").unwrap();
 /// let c1 = Color::from_hex(0x333333);
 /// let c2 = Color::from_hex(0x666666);
