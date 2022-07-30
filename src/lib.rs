@@ -110,7 +110,7 @@ impl Color {
     ///
     /// # Panics
     ///
-    /// Panics when the r, g, or b values are < 0.0 or > 1.0.
+    /// Panics when the R, G, or B values are < 0.0 or > 1.0.
     ///
     /// # Example
     ///
@@ -153,7 +153,14 @@ impl Color {
     ///
     /// # Panics
     ///
-    /// Panics when the h, s, and l values are < 0.0 or > 1.0.
+    /// Panics when S and L values are < 0.0 or > 1.0.
+    ///
+    /// # Note
+    ///
+    /// Hue can be set to any value but as it is a rotation
+    /// around the chromatic circle, any value above 1 or below 0 can
+    /// be expressed by a value between 0 and 1 (Note that `h = 0` is equivalent
+    /// to `h = 1`).
     ///
     /// # Example
     ///
@@ -184,7 +191,14 @@ impl Color {
     ///
     /// # Panics
     ///
-    /// Panics when the h, s, and v values are < 0.0 or > 1.0.
+    /// Panics when S and V values are < 0.0 or > 1.0.
+    ///
+    /// # Note
+    ///
+    /// Hue can be set to any value but as it is a rotation
+    /// around the chromatic circle, any value above 1 or below 0 can
+    /// be expressed by a value between 0 and 1 (Note that `h = 0` is equivalent
+    /// to `h = 1`).
     ///
     /// # Example
     ///
