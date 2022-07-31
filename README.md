@@ -4,7 +4,23 @@ Converts colors to many common color representations (e.g. RGB, HSL, HSV) and do
 colour manipulation operations. Thanks to [colour](https://pypi.org/project/colour/) and
 [colors.py](https://pypi.org/project/colors.py/) for inspiring the API (and documentation) of this project.
 
-# Features:
+# Note
+
+`Color` stores colors using the RGB color model, storing R, G, and B values as `u8`s. Hence,
+the result you get back from converting from HSL/HSV to `Color` and back will not always be the same
+due to lack of precision.
+
+```rs
+use octarine::Color;
+
+let to_hsl = Color::from_hsl(0.0, 0.0, 0.5).to_hsl();
+assert_ne!((0.0, 0.0, 0.5), to_hsl);
+
+let to_hsv = Color::from_hsv(0.0, 0.0, 0.5).to_hsv();
+assert_ne!((0.0, 0.0, 0.5), to_hsv);
+```
+
+# Features
 
 - Extremely simple API (subjective).
 - Convert between RGB, HSL, HSV, W3C web colors, and hexadecimal.
