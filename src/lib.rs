@@ -636,7 +636,7 @@ impl Color {
     ///
     /// # Panics
     ///
-    /// Panics when steps is 0.
+    /// Panics when `steps` is 0.
     ///
     /// # Example
     ///
