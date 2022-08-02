@@ -60,6 +60,7 @@
 use rand::{prelude::SmallRng, Rng, SeedableRng};
 use std::{
     fmt::Debug,
+    num::NonZeroUsize,
     ops::{Add, Div, Mul, Sub},
 };
 
@@ -634,21 +635,18 @@ impl Color {
     /// of variation between the current color and another color specified. Refer to
     /// [`ColorRange`] for more information on how it works.
     ///
-    /// # Panics
-    ///
-    /// Panics when steps is 0.
-    ///
     /// # Example
     ///
     /// ```
     /// use octarine::Color;
+    /// use std::num::NonZeroUsize;
     ///
     /// let c0 = Color::from_web_color("red").unwrap();
     /// let c1 = Color::from_hex(0xFF7F00);
     /// let c2 = Color::from_web_color("yellow").unwrap();
     /// let c3 = Color::new(128, 255, 0);
     /// let c4 = Color::from_web_color("lime").unwrap();
-    /// let mut range_to = c0.range_to(c4.clone(), 5);
+    /// let mut range_to = c0.range_to(c4.clone(), NonZeroUsize::new(5).unwrap());
     ///
     /// assert_eq!(Some(c0), range_to.next());
     /// assert_eq!(Some(c1), range_to.next());
@@ -658,14 +656,14 @@ impl Color {
     /// assert_eq!(None, range_to.next());
     /// ```
     #[inline]
-    pub fn range_to(&self, value: Self, steps: usize) -> ColorRange {
-        ColorRange::new(self.clone(), value, steps)
+    pub fn range_to(&self, value: Self, steps: NonZeroUsize) -> ColorRange {
+        ColorRange::new(self.clone(), value, steps.into())
     }
 
     /// This method offers a way to equate colors using [`Equivalence`], in which a color is
     /// equated using its RGB, HSL, or HSV values.
     ///
-    /// # Notes
+    /// # Note
     ///
     /// By default octarine uses `[Equivalence::RGB]` for its [`PartialEq`] representation, so
     /// if such equality operations are not required, you can simply
@@ -836,13 +834,14 @@ impl Default for ColorWheel {
 ///
 /// ```
 /// use octarine::Color;
+/// use std::num::NonZeroUsize;
 ///
 /// let c0 = Color::from_web_color("red").unwrap();
 /// let c1 = Color::from_hex(0xFF7F00);
 /// let c2 = Color::from_web_color("yellow").unwrap();
 /// let c3 = Color::new(128, 255, 0);
 /// let c4 = Color::from_web_color("lime").unwrap();
-/// let mut range_to = c0.range_to(c4.clone(), 5);
+/// let mut range_to = c0.range_to(c4.clone(), NonZeroUsize::new(5).unwrap());
 ///
 /// assert_eq!(Some(c0), range_to.next());
 /// assert_eq!(Some(c1), range_to.next());
@@ -856,6 +855,7 @@ impl Default for ColorWheel {
 ///
 /// ```
 /// use octarine::Color;
+/// use std::num::NonZeroUsize;
 ///
 /// let c0 = Color::from_web_color("black").unwrap();
 /// let c1 = Color::from_hex(0x333333);
@@ -863,7 +863,7 @@ impl Default for ColorWheel {
 /// let c3 = Color::from_hex(0x999999);
 /// let c4 = Color::from_hex(0xCCCCCC);
 /// let c5 = Color::from_web_color("white").unwrap();
-/// let mut range_to = c0.range_to(c5.clone(), 6);
+/// let mut range_to = c0.range_to(c5.clone(), NonZeroUsize::new(6).unwrap());
 ///
 /// assert_eq!(Some(c0), range_to.next());
 /// assert_eq!(Some(c1), range_to.next());
@@ -1048,7 +1048,7 @@ mod tests {
         let c2 = Color::from_web_color("yellow").unwrap();
         let c3 = Color::new(128, 255, 0);
         let c4 = Color::from_web_color("lime").unwrap();
-        let mut range_to = c0.range_to(c4.clone(), 5);
+        let mut range_to = c0.range_to(c4.clone(), NonZeroUsize::new(5).unwrap());
         assert_eq!(Some(c0), range_to.next());
         assert_eq!(Some(c1), range_to.next());
         assert_eq!(Some(c2), range_to.next());
@@ -1061,7 +1061,7 @@ mod tests {
         let c3 = Color::from_hex(0x999999);
         let c4 = Color::from_hex(0xCCCCCC);
         let c5 = Color::from_web_color("white").unwrap();
-        let mut range_to = c0.range_to(c5.clone(), 6);
+        let mut range_to = c0.range_to(c5.clone(), NonZeroUsize::new(6).unwrap());
         assert_eq!(Some(c0), range_to.next());
         assert_eq!(Some(c1), range_to.next());
         assert_eq!(Some(c2), range_to.next());
