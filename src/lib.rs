@@ -665,7 +665,7 @@ impl Color {
     /// This method offers a way to equate colors using [`Equivalence`], in which a color is
     /// equated using its RGB, HSL, or HSV values.
     ///
-    /// # Notes
+    /// # Note
     ///
     /// By default octarine uses `[Equivalence::RGB]` for its [`PartialEq`] representation, so
     /// if such equality operations are not required, you can simply
